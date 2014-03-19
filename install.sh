@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#Install script for Hadoop 2.3 on CentOS 6.5.3/x86_64
+
 # install packages
 yum install -y curl which tar sudo openssh-server openssh-clients rsync
 
