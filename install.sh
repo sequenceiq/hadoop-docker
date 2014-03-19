@@ -73,7 +73,7 @@ build-native-libs() {
 
   curl http://www.eu.apache.org/dist/hadoop/common/hadoop-2.3.0/hadoop-2.3.0-src.tar.gz|tar xz -C /tmp
   cd /tmp/hadoop-2.3.0-src/
-  mvn package -Pdist,native -Dskiptests -Dtar -DskipTests
+  mvn package -Pdist,native -DskipTests -Dtar -DskipTests
 
   rm  /usr/local/hadoop/lib/native/*
   cp -d /tmp/hadoop-2.3.0-src/hadoop-dist/target/hadoop-2.3.0/lib/native/* /usr/local/hadoop/lib/native/
