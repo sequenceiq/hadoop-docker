@@ -35,11 +35,14 @@ RUN sed -i '/^export HADOOP_CONF_DIR/ s:.*:export HADOOP_CONF_DIR=/usr/local/had
 RUN mkdir $HADOOP_PREFIX/input
 RUN cp $HADOOP_PREFIX/etc/hadoop/*.xml $HADOOP_PREFIX/input
 
-
 # pseudo distributed
 ADD core-site.xml $HADOOP_PREFIX/etc/hadoop/core-site.xml
 
 ADD hdfs-site.xml $HADOOP_PREFIX/etc/hadoop/hdfs-site.xml
+
+ADD mapred-site.xml $HADOOP_PREFIX/etc/hadoop/mapred-site.xml
+
+ADD yarn-site.xml $HADOOP_PREFIX/etc/hadoop/yarn-site.xml
 
 RUN $HADOOP_PREFIX/bin/hdfs namenode -format
 
