@@ -29,8 +29,8 @@ To succeed on that one you have to install a couple of development packages, and
 ## Bintray
 
 I wanted to save you those steps so created a binary distro of the native libs
-compiled with 64 bit CentOS. So I created [Bintray repo](https://bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64bit/2.3.0/view/files). Enjoy
+compiled with 64 bit CentOS. So I created [Bintray r̨epo](https://bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64bit/2.3.0/view/files). Enjoy
 
 ## Automate everithing
 
-As I'm an automation fetishist, a Docker file was created, and released in the official [docker repo]()
+As I'm an automation fetishist, a Docker file was created, and released in the official [docker repo](https://index.docker.io/u/sequenceiq/hadoop-docker/)
