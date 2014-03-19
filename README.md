@@ -4,7 +4,7 @@ You want to try out hadoop 2.3? Go to the zoo and [shave a yak](http://sethgodin
 Or simply just use [docker](https://www.docker.io/).
 
 ```
-dockr run -i -t sequenceiq/hadoop /bin/bash
+docker run -i -t sequenceiq/hadoop /bin/bash
 ```
 
 ## too long didn't read
