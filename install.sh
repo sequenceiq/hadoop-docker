@@ -77,6 +77,7 @@ EOF
 #set the hostname - fix vagrant issue
 ping $HOSTNAME -c 1 -W 1 || echo "127.0.0.1 $HOSTNAME" >>/etc/hosts
 
+# format HDFS namenode
 $HADOOP_PREFIX/bin/hdfs namenode -format
 
 build-native-libs() {
@@ -85,6 +86,7 @@ build-native-libs() {
   yum groupinstall "Development Tools" -y
   yum install -y cmake zlib-devel openssl-devel
 
+  # maven
   curl http://www.eu.apache.org/dist/maven/maven-3/3.2.1/binaries/apache-maven-3.2.1-bin.tar.gz|tar xz  -C /usr/share
   export M2_HOME=/usr/share/apache-maven-3.2.1
   export PATH=$PATH:$M2_HOME/bin
@@ -96,6 +98,7 @@ build-native-libs() {
   export LD_LIBRARY_PATH=/usr/local/lib
   export LD_RUN_PATH=/usr/local/lib
 
+  # hadoop
   curl http://www.eu.apache.org/dist/hadoop/common/hadoop-2.3.0/hadoop-2.3.0-src.tar.gz|tar xz -C /tmp
   cd /tmp/hadoop-2.3.0-src/
   mvn package -Pdist,native -DskipTests -Dtar -DskipTests
@@ -104,18 +107,18 @@ build-native-libs() {
   cp -d /tmp/hadoop-2.3.0-src/hadoop-dist/target/hadoop-2.3.0/lib/native/* /usr/local/hadoop/lib/native/
 }
 
-# fixing the libhadoop.so like a boss
-build-native-libs() {
+# fixing the libhadoop.so - we have built a 64bit distro for Hadoop native libs
+use-native-libs() {
   rm -rf /usr/local/hadoop/lib/native/*
   curl -Ls http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64.tar|tar -x -C /usr/local/hadoop/lib/native/
 }
 
 #*****
-build-native-libs
+use-native-libs
 
-#######
+####################
 # testing mapreduce
-#######
+####################
 
 $HADOOP_PREFIX/bin/hdfs namenode -format$HADOOP_PREFIX/sbin/start-dfs.sh
 $HADOOP_PREFIX/sbin/start-all.sh
@@ -125,27 +128,30 @@ $HADOOP_PREFIX/bin/hdfs dfs -put $HADOOP_PREFIX/etc/hadoop/ input
 $HADOOP_PREFIX/bin/hadoop jar $HADOOP_PREFIX/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.3.0.jar grep input output 'dfs[a-z.]+'
 $HADOOP_PREFIX/bin/hdfs dfs -cat output/*
 
-#hoya build with flume
-#cd /tmp
-#curl -LO https://github.com/sequenceiq/hoya/archive/master.zip
-#yum install unzip
-#unzip master.zip
-#cd hoya-master
-#mvn clean install -DskipTests
+#optional function - don't needed unless you'd like to use the Flume provider
+build-hoya-with-flume-provider() {
+  #hoya build with flume
+  cd /tmp
+  curl -LO https://github.com/sequenceiq/hoya/archive/master.zip
+  yum install unzip
+  unzip master.zip
+  cd hoya-master
+  mvn clean install -DskipTests
+}
 
-#download Hoya
+#download Hoya release 0.13
 curl -s http://dffeaef8882d088c28ff-185c1feb8a981dddd593a05bb55b67aa.r18.cf1.rackcdn.com/hoya-0.13.1-all.tar.gz | tar -xz -C /usr/local/
 cd /usr/local
 ln -s hoya-0.13.1 hoya
 export HOYA_HOME=/usr/local/hoya
 export PATH=$PATH:$HOYA_HOME/bin
 
-#download HBase and copy to HDFS
+#download HBase and copy to HDFS for Hoya
 cd /tmp
 curl -sLO http://www.eu.apache.org/dist/hbase/hbase-0.98.0/hbase-0.98.0-hadoop2-bin.tar.gz
 $HADOOP_PREFIX/bin/hadoop dfs -put hbase-0.98.0-hadoop2-bin.tar.gz /hbase.tar.gz
 
-#download Zookeeper
+#download Zookeeper and start
 cd /tmp
 curl -s http://www.eu.apache.org/dist/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz | tar -xz -C /usr/local/
 ln -s zookeeper-3.3.6 zookeeper
