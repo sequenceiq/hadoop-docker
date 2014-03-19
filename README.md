@@ -4,7 +4,31 @@ You want to try out hadoop 2.3? Go to the zoo and [shave a yak](http://sethgodin
 Or simply just use [docker](https://www.docker.io/).
 
 ```
-docker run -i -t sequenceiq/hadoop /bin/bash
+docker run -i -t sequenceiq/hadoop-docker /bin/bash
+```
+
+## Testing
+
+You can run one of the stock examples:
+
+```bash
+# start ssh and hdfs
+service sshd start
+. /usr/local/hadoop/etc/hadoop/hadoop-env.sh
+cd $HADOOP_HOME
+sbin/start-dfs.sh
+
+# format and create directories
+bin/hdfs namenode -format
+sbin/start-dfs.sh
+bin/hdfs dfs -mkdir -p /user/root
+bin/hdfs dfs -put etc/hadoop/ input
+
+# run the mapreduce
+bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.3.0.jar grep input output 'dfs[a-z.]+'
+
+# check the output
+bin/hdfs dfs -cat output/*
 ```
 
 ## too long didn't read
