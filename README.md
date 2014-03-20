@@ -15,12 +15,13 @@ You can run one of the stock examples:
 # start ssh and hdfs
 service sshd start
 . /usr/local/hadoop/etc/hadoop/hadoop-env.sh
+. /usr/local/hadoop/etc/hadoop/yarn-env.sh
 cd $HADOOP_HOME
 sbin/start-dfs.sh
 
 # format and create directories
 bin/hdfs namenode -format
-sbin/start-dfs.sh
+sbin/start-yarn.sh
 bin/hdfs dfs -mkdir -p /user/root
 bin/hdfs dfs -put etc/hadoop/ input
 
@@ -30,6 +31,8 @@ bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.3.0.jar grep i
 # check the output
 bin/hdfs dfs -cat output/*
 ```
+
+
 
 ## too long didn't read
 I had problems installing hadoop 2.3 and by googling i stumbled upon this [email thread](http://mail-archives.apache.org/mod_mbox/hadoop-mapreduce-user/201403.mbox/%3C53192FD4.2040003@oss.nttdata.co.jp%3E),
