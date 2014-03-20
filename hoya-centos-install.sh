@@ -120,8 +120,8 @@ use-native-libs
 # testing mapreduce
 ####################
 
-$HADOOP_PREFIX/bin/hdfs namenode -format$HADOOP_PREFIX/sbin/start-dfs.sh
-$HADOOP_PREFIX/sbin/start-all.sh
+$HADOOP_PREFIX/bin/hdfs namenode -format
+$HADOOP_PREFIX/sbin/start-dfs.sh
 $HADOOP_PREFIX/sbin/start-yarn.sh
 $HADOOP_PREFIX/bin/hdfs dfs -mkdir -p /user/root
 $HADOOP_PREFIX/bin/hdfs dfs -put $HADOOP_PREFIX/etc/hadoop/ input
@@ -184,5 +184,6 @@ service sshd start
 . /usr/local/hadoop/etc/hadoop/hadoop-env.sh
 cd $HADOOP_HOME
 sbin/start-dfs.sh
+sbin/start-yarn.sh
 
 EOF
