@@ -13,9 +13,7 @@ RUN ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key
 RUN ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key
 RUN ssh-keygen -q -N "" -t rsa -f /root/.ssh/id_rsa
 RUN cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
-RUN service sshd start
-RUN ssh -o StrictHostKeyChecking=no localhost true
-RUN ssh -o StrictHostKeyChecking=no 127.0.0.1 true
+
 
 # java
 RUN curl -LO 'http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.rpm' -H 'Cookie: oraclelicense=accept-securebackup-cookie'
@@ -39,11 +37,9 @@ RUN cp $HADOOP_PREFIX/etc/hadoop/*.xml $HADOOP_PREFIX/input
 
 # pseudo distributed
 ADD core-site.xml $HADOOP_PREFIX/etc/hadoop/core-site.xml
-
 ADD hdfs-site.xml $HADOOP_PREFIX/etc/hadoop/hdfs-site.xml
 
 ADD mapred-site.xml $HADOOP_PREFIX/etc/hadoop/mapred-site.xml
-
 ADD yarn-site.xml $HADOOP_PREFIX/etc/hadoop/yarn-site.xml
 
 RUN $HADOOP_PREFIX/bin/hdfs namenode -format
@@ -52,4 +48,26 @@ RUN $HADOOP_PREFIX/bin/hdfs namenode -format
 RUN rm  /usr/local/hadoop/lib/native/*
 RUN curl -Ls http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64.tar|tar -x -C /usr/local/hadoop/lib/native/
 
-EXPOSE 50070
+RUN service sshd start && ssh -o StrictHostKeyChecking=no localhost true
+RUN service sshd start && ssh -o StrictHostKeyChecking=no 127.0.0.1 true
+RUN service sshd start && ssh -o StrictHostKeyChecking=no 0.0.0.0 true
+
+# # insatlling supervisord
+# RUN yum install -y python-setuptools
+# RUN easy_install pip
+# RUN curl https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py -o - | python
+# RUN pip install supervisor
+#
+# ADD supervisord.conf /etc/supervisord.conf
+
+ADD bootstrap.sh $HADOOP_PREFIX/bootstrap.sh
+RUN chmod +s $HADOOP_PREFIX/bootstrap.sh
+
+ENV BOOTSTRAP $HADOOP_PREFIX/bootstrap.sh
+
+RUN $BOOTSTRAP && $HADOOP_PREFIX/bin/hdfs dfs -mkdir -p /user/root
+RUN $BOOTSTRAP && $HADOOP_PREFIX/bin/hdfs dfs -put $HADOOP_PREFIX/etc/hadoop/ input
+
+CMD ["/usr/local/hadoop/bootstrap.sh", "-d"]
+
+EXPOSE 50020 50090 50070 22 50010 50075 8031 8032 8033 8040 8042 49707 22 8088 8030
