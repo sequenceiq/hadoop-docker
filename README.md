@@ -4,14 +4,15 @@ You want to try out hadoop 2.3? Go to the zoo and [shave a yak](http://sethgodin
 Or simply just use [docker](https://www.docker.io/).
 
 ```
-docker run -i -t sequenceiq/hadoop-docker /usr/local/hadoop/bootstrap.sh -bash
+docker run -i -t sequenceiq/hadoop-docker /etc/bootstrap.sh -bash
 ```
 
 ## Testing
 
 You can run one of the stock examples:
 
-``` bash
+```
+cd $HADOOP_PREFIX
 # run the mapreduce
 bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.3.0.jar grep input output 'dfs[a-z.]+'
 

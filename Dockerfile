@@ -61,14 +61,15 @@ RUN chown root:root /root/.ssh/config
 #
 # ADD supervisord.conf /etc/supervisord.conf
 
-ADD bootstrap.sh $HADOOP_PREFIX/bootstrap.sh
-RUN chmod +s $HADOOP_PREFIX/bootstrap.sh
+ADD bootstrap.sh /etc/bootstrap.sh
+RUN chown root:root /etc/bootstrap.sh
+RUN chmod 700 /etc/bootstrap.sh
 
-ENV BOOTSTRAP $HADOOP_PREFIX/bootstrap.sh
+ENV BOOTSTRAP /etc/bootstrap.sh
 
 RUN $BOOTSTRAP && $HADOOP_PREFIX/bin/hdfs dfs -mkdir -p /user/root
 RUN $BOOTSTRAP && $HADOOP_PREFIX/bin/hdfs dfs -put $HADOOP_PREFIX/etc/hadoop/ input
 
-CMD ["/usr/local/hadoop/bootstrap.sh", "-d"]
+CMD ["/etc/bootstrap.sh", "-d"]
 
 EXPOSE 50020 50090 50070 22 50010 50075 8031 8032 8033 8040 8042 49707 22 8088 8030
