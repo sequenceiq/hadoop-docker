@@ -49,9 +49,9 @@ RUN rm  /usr/local/hadoop/lib/native/*
 RUN curl -Ls http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64.tar|tar -x -C /usr/local/hadoop/lib/native/
 
 # TODO: return true to workaround docker.io build error
-RUN (service sshd start && ssh -o StrictHostKeyChecking=no localhost true &> /dev/null) || true
-RUN (service sshd start && ssh -o StrictHostKeyChecking=no 127.0.0.1 true &> /dev/null) || true
-RUN (service sshd start && ssh -o StrictHostKeyChecking=no 0.0.0.0 true &> /dev/null) || true
+ADD ssh_config /root/.ssh/config
+RUN chmod 600 /root/.ssh/config
+RUN chown root:root /root/.ssh/config
 
 # # insatlling supervisord
 # RUN yum install -y python-setuptools
