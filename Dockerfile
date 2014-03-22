@@ -67,6 +67,9 @@ RUN chmod 700 /etc/bootstrap.sh
 ENV BOOTSTRAP /etc/bootstrap.sh
 
 # workingaround docker.io build error
+RUN ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
+RUN chmod +x /usr/local/hadoop/etc/hadoop/*-env.sh
+RUN ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
 RUN $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh && $HADOOP_PREFIX/sbin/start-dfs.sh && $HADOOP_PREFIX/bin/hdfs dfs -mkdir -p /user/root
 RUN $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh && $HADOOP_PREFIX/sbin/start-dfs.sh && $HADOOP_PREFIX/bin/hdfs dfs -put $HADOOP_PREFIX/etc/hadoop/ input
 
