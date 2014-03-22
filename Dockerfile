@@ -5,6 +5,8 @@
 FROM tianon/centos
 MAINTAINER SequenceIQ
 
+USER root
+
 # install dev tools
 RUN yum install -y curl which tar sudo openssh-server openssh-clients rsync
 
