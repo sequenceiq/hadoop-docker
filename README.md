@@ -49,3 +49,16 @@ compiled with 64 bit CentOS. So I created [Bintray r̨epo](https://bintray.com/s
 ## Automate everything
 
 As I'm an automation fetishist, a Docker file was created, and released in the official [docker repo](https://index.docker.io/u/sequenceiq/hadoop-docker/)
+
+
+## Additional classpath
+
+It is possible to add libraries to the classpath of a yarn container, by passing an environment variable as follows:
+
+```
+ACP_SRC=http://repo1.maven.org/maven2/org/apache/mahout
+ACP=$ACP_SRC/mahout-core/0.9/mahout-core-0.9.jar,$ACP_SRC/mahout-math/0.9/mahout-math-0.9.jar,$ACP_SRC/mahout-integration/0.9/mahout-integration-0.9.jar
+docker run -e "ACP=$ACP" -t -d -h sandbox --name sandbox  my-sandbox /etc/bootstrap.sh -bash
+```
+The ACP environment variable is a comma separated list of urls where the needed resources can be downloaded from.
+Libraries are copied to the $HADOOP_PREFIX/share/hadoop/common/ folder.
