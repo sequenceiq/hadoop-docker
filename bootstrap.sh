@@ -4,6 +4,7 @@
 
 $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
 
+rm /tmp/*.pid
 service sshd start
 $HADOOP_PREFIX/sbin/start-dfs.sh
 $HADOOP_PREFIX/sbin/start-yarn.sh
