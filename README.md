@@ -1,7 +1,21 @@
-# Yak shaving an elefant
+#Apache Hadoop 2.4.0 Docker image
 
-You want to try out hadoop 2.3? Go to the zoo and [shave a yak](http://sethgodin.typepad.com/seths_blog/2005/03/dont_shave_that.html).
-Or simply just use [docker](https://www.docker.io/).
+Following on the success of our Hadoop 2.3 Docker image on https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/ and aligning with the Hadoop release cycle, we have released a Hadoop 2.4 Docker image.
+
+
+# Build the image
+
+In case you'd like to try directly from the Dockerfile you can build the image as:
+
+```
+docker build  -t sequenceiq/hadoop-docker .
+```
+
+The image is also released as an official Docker image from Docker's automated build repository - you can always pull or refer the image when launching containers.
+
+# Start a container
+
+In order to use the Docker image you have just build or pulled use:
 
 ```
 docker run -i -t sequenceiq/hadoop-docker /etc/bootstrap.sh -bash
@@ -14,41 +28,20 @@ You can run one of the stock examples:
 ```
 cd $HADOOP_PREFIX
 # run the mapreduce
-bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.3.0.jar grep input output 'dfs[a-z.]+'
+bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.4.0.jar grep input output 'dfs[a-z.]+'
 
 # check the output
 bin/hdfs dfs -cat output/*
 ```
 
+## Hadoop native libraries, build, Bintray, etc
 
+The Hadoop build process is no easy task - requires lots of libraries and their right version, protobuf, etc and takes some time - we have simplified all these, made the build and released a 64b version of Hadoop nativelibs on this [Bintray repo](https://bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64bit/2.4.0/view/files). Enjoy. 
 
-## too long didn't read
-I had problems installing hadoop 2.3 and by googling i stumbled upon this [email thread](http://mail-archives.apache.org/mod_mbox/hadoop-mapreduce-user/201403.mbox/%3C53192FD4.2040003@oss.nttdata.co.jp%3E),
-which references an [alternative hadoop docs](http://aajisaka.github.io/hadoop-project/hadoop-project-dist/hadoop-common/SingleCluster.html#Standalone_Operation) deployed on github.
-
-By following that description i run into an other issue:
-hadoop is delivered with 32 bit native libraries. No big deal ...
-
-## Hadoop native libraries
-
-Of course there is an official [Native Libraries Guide](http://hadoop.apache.org/docs/r2.3.0/hadoop-project-dist/hadoop-common/NativeLibraries.html) it instructs you
-to simple download the sources and `mvn package`. But than you face a new issue: missing `protobuf`. Eeeasy ...
-
-## Protobuf 2.5
-
-Unfortunately `yum install protobuf` installs an older 2.3 version, which is close but no cigar.
- So you download protobuf source, and `./configure && make && make install`
-
-To succeed on that one you have to install a couple of development packages, and there you go.
-
-## Bintray
-
-I wanted to save you those steps so created a binary distro of the native libs
-compiled with 64 bit CentOS. So I created [Bintray r̨epo](https://bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64bit/2.3.0/view/files). Enjoy
 
 ## Automate everything
 
-As I'm an automation fetishist, a Docker file was created, and released in the official [docker repo](https://index.docker.io/u/sequenceiq/hadoop-docker/)
+As we have mentioned previousely, a Docker file was created and released in the official [docker repo](https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/)
 
 
 ## Additional classpath
