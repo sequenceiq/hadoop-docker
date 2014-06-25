@@ -1,6 +1,6 @@
 #Apache Hadoop 2.4.0 Docker image
 
-Following on the success of our Hadoop 2.3 Docker image on https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/ and aligning with the Hadoop release cycle, we have released a Hadoop 2.4 Docker image.
+Following on the success of our Hadoop 2.3 Docker [image](https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/) and aligning with the Hadoop release cycle, we have released a Hadoop 2.4 Docker image - same as the previous version this is available as a trusted and automated build on the official Docker registry.
 
 
 # Build the image
