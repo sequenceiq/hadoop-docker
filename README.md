@@ -10,8 +10,13 @@ In case you'd like to try directly from the Dockerfile you can build the image a
 ```
 docker build  -t sequenceiq/hadoop-docker .
 ```
+# Pull the image
 
 The image is also released as an official Docker image from Docker's automated build repository - you can always pull or refer the image when launching containers.
+
+```
+docker pull sequenceiq/hadoop-docker:2.4.0
+```
 
 # Start a container
 
