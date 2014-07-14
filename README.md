@@ -3,7 +3,7 @@
 A few weeks ago we have released an Apache Hadoop 2.3 Docker image - in a very short time this become the most [popular](https://registry.hub.docker.com/search?q=hadoop&s=downloads) Hadoop image in the Docker [registry](https://registry.hub.docker.com/).
 
 
-Following on the success of our Hadoop 2.3 Docker [image](https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/), the feedbacks and requests we have received and aligning with the Hadoop release cycle, we have released an Apache Hadoop 2.4.1 Docker image - same as the previous version this is available as a trusted and automated build on the official Docker [registry](https://registry.hub.docker.com/).
+Following the success of our Hadoop 2.3 Docker [image](https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/), the feedbacks and requests we have received and aligning with the Hadoop release cycle, we have released an Apache Hadoop 2.4.1 Docker image - same as the previous version this is available as a trusted and automated build on the official Docker [registry](https://registry.hub.docker.com/).
 
 
 _FYI:All the former Hadoop releases (2.3, 2.4.0, 2.4.1) are available in the GitHub branches or our [Docker Registry](https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/) - check the tags._
