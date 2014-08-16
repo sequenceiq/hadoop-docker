@@ -13,7 +13,7 @@ _FYI:All the former Hadoop releases (2.3, 2.4.0, 2.4.1, 2.5.0) are available in 
 If you'd like to try directly from the Dockerfile you can build the image as:
 
 ```
-docker build  -t sequenceiq/hadoop-docker .
+docker build  -t sequenceiq/hadoop-docker:2.5.0 .
 ```
 # Pull the image
 
