@@ -6,7 +6,7 @@ A few weeks ago we released an Apache Hadoop 2.3 Docker image - this quickly bec
 Following the success of our Hadoop 2.3 Docker [image](https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/), the feedback and feature requests we received aligned with the Hadoop release cycle, so we have released an Apache Hadoop 2.5.0 Docker image - same as the previous version, it's available as a trusted and automated build on the official Docker [registry](https://registry.hub.docker.com/).
 
 
-_FYI:All the former Hadoop releases (2.3, 2.4.0, 2.4.1, 2.5.0) are available in the GitHub branches or our [Docker Registry](https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/) - check the tags._
+_FYI: All the former Hadoop releases (2.3, 2.4.0, 2.4.1, 2.5.0) are available in the GitHub branches or our [Docker Registry](https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/) - check the tags._
 
 # Build the image
 
@@ -47,7 +47,6 @@ bin/hdfs dfs -cat output/*
 ## Hadoop native libraries, build, Bintray, etc
 
 The Hadoop build process is no easy task - requires lots of libraries and their right version, protobuf, etc and takes some time - we have simplified all these, made the build and released a 64b version of Hadoop nativelibs on this [Bintray repo](https://bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64bit/2.5.0/view/files). Enjoy.
-
 
 ## Automate everything
 
