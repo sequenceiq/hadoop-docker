@@ -28,7 +28,7 @@ docker pull sequenceiq/hadoop-docker:2.5.0
 In order to use the Docker image you have just build or pulled use:
 
 ```
-docker run -i -t sequenceiq/hadoop-docker /etc/bootstrap.sh -bash
+docker run -i -t sequenceiq/hadoop-docker:2.5.0 /etc/bootstrap.sh -bash
 ```
 
 ## Testing
