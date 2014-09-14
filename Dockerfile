@@ -8,7 +8,6 @@ MAINTAINER SequenceIQ
 USER root
 
 # install dev tools
-RUN apt-get update
 RUN apt-get install -y curl tar sudo openssh-server openssh-client rsync
 
 # passwordless ssh
@@ -20,11 +19,10 @@ RUN cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
 
 
 # java
-RUN curl -LO 'http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.tar.gz' -H 'Cookie: oraclelicense=accept-securebackup-cookie'
+RUN mkdir -p /usr/java/default && \
+    curl -Ls 'http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.tar.gz' -H 'Cookie: oraclelicense=accept-securebackup-cookie' | \
+    tar --strip-components=1 -xz -C /usr/java/default/
 
-#RUN tar -xf jdk-7u51-linux-x64.tar.gz
-RUN mkdir -p /usr/java/default
-RUN tar --strip-components=1 -xf jdk-7u51-linux-x64.tar.gz -C /usr/java/default/
 ENV JAVA_HOME /usr/java/default/
 ENV PATH $PATH:$JAVA_HOME/bin
 
