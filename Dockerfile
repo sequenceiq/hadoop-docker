@@ -1,4 +1,4 @@
-# Creates pseudo distributed hadoop 2.5.0
+# Creates pseudo distributed hadoop 2.5.1
 #
 # docker build -t sequenceiq/hadoop .
 
@@ -26,8 +26,8 @@ ENV JAVA_HOME /usr/java/default
 ENV PATH $PATH:$JAVA_HOME/bin
 
 # hadoop
-RUN curl -s http://www.eu.apache.org/dist/hadoop/common/hadoop-2.5.0/hadoop-2.5.0.tar.gz | tar -xz -C /usr/local/
-RUN cd /usr/local && ln -s ./hadoop-2.5.0 hadoop
+RUN curl -s http://www.eu.apache.org/dist/hadoop/common/hadoop-2.5.1/hadoop-2.5.1.tar.gz | tar -xz -C /usr/local/
+RUN cd /usr/local && ln -s ./hadoop-2.5.1 hadoop
 
 ENV HADOOP_PREFIX /usr/local/hadoop
 RUN sed -i '/^export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/java/default\nexport HADOOP_PREFIX=/usr/local/hadoop\nexport HADOOP_HOME=/usr/local/hadoop\n:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
