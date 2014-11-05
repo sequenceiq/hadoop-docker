@@ -27,6 +27,8 @@ docker pull sequenceiq/hadoop-docker:2.5.1
 
 In order to use the Docker image you have just build or pulled use:
 
+**Make sure that SELinux is disabled on the host. If you are using boot2docker you don't need to do anything.**
+
 ```
 docker run -i -t sequenceiq/hadoop-docker:2.5.1 /etc/bootstrap.sh -bash
 ```
