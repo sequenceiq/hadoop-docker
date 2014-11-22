@@ -1,4 +1,4 @@
-#Apache Hadoop 2.5.1 Docker image
+#Apache Hadoop 2.5.2 Docker image
 
 _Note: this is the master branch - for a particular Hadoop version always check the related branch_
 
