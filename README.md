@@ -32,7 +32,7 @@ In order to use the Docker image you have just build or pulled use:
 **Make sure that SELinux is disabled on the host. If you are using boot2docker you don't need to do anything.**
 
 ```
-docker run -i -t sequenceiq/hadoop-docker:2.6.0 /etc/bootstrap.sh -bash
+docker run -i -t -v /usr/local/bin/docker:/usr/local/bin/docker -v /var/run/docker.sock:/var/run/docker.sock sequenceiq/hadoop-docker:2.6.0 /etc/bootstrap.sh -bash
 ```
 
 ## Testing
