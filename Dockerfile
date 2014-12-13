@@ -91,6 +91,11 @@ RUN echo "Port 2122" >> /etc/ssh/sshd_config
 RUN service sshd start && $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh && $HADOOP_PREFIX/sbin/start-dfs.sh && $HADOOP_PREFIX/bin/hdfs dfs -mkdir -p /user/root
 RUN service sshd start && $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh && $HADOOP_PREFIX/sbin/start-dfs.sh && $HADOOP_PREFIX/bin/hdfs dfs -put $HADOOP_PREFIX/etc/hadoop/ input
 
+RUN mkdir -p /mnt/sda1/tmp/hadoop-root/nm-local-dir/usercache/root/appcache/
+
+#Set up debug options as specified in /usr/local/hadoop/bin/yarn
+#RUN echo 'YARN_NODEMANAGER_OPTS="$YARN_NODEMANAGER_OPTS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5678"' >> $HADOOP_PREFIX/etc/hadoop/yarn-env.sh
+
 CMD ["/etc/bootstrap.sh", "-d"]
 
 EXPOSE 50020 50090 50070 50010 50075 8031 8032 8033 8040 8042 49707 22 8088 8030
