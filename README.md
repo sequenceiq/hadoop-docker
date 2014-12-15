@@ -35,6 +35,10 @@ In order to use the Docker image you have just build or pulled use:
 docker run -i -t sequenceiq/hadoop-docker:2.6.0 /etc/bootstrap.sh -bash
 ```
 
+## SSH-ing 
+
+You can connect to the container via 2122 port
+
 ## Testing
 
 You can run one of the stock examples:
