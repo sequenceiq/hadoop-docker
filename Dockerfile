@@ -26,7 +26,7 @@ ENV JAVA_HOME /usr/java/default
 ENV PATH $PATH:$JAVA_HOME/bin
 
 # hadoop
-RUN curl -s http://www.eu.apache.org/dist/hadoop/common/hadoop-2.4.1/hadoop-2.4.1.tar.gz | tar -xz -C /usr/local/
+RUN curl -s http://archive.apache.org/dist/hadoop/core/hadoop-2.4.1/hadoop-2.4.1.tar.gz | tar -xz -C /usr/local/
 RUN cd /usr/local && ln -s ./hadoop-2.4.1 hadoop
 
 ENV HADOOP_PREFIX /usr/local/hadoop
