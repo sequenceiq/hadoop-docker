@@ -8,7 +8,9 @@ MAINTAINER SequenceIQ
 USER root
 
 # install dev tools
-RUN yum install -y curl which tar sudo openssh-server openssh-clients rsync
+RUN yum clean all; \
+    rpm --rebuilddb; \
+    yum install -y curl which tar sudo openssh-server openssh-clients rsync
 # update libselinux. see https://github.com/sequenceiq/hadoop-docker/issues/14
 RUN yum update -y libselinux
 
