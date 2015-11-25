@@ -1,4 +1,4 @@
-# Creates pseudo distributed hadoop 2.7.0
+# Creates pseudo distributed hadoop 2.7.1
 #
 # docker build -t sequenceiq/hadoop .
 
@@ -31,11 +31,11 @@ ENV PATH $PATH:$JAVA_HOME/bin
 
 # download native support
 RUN mkdir -p /tmp/native
-RUN curl -Ls http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64-2.7.0.tar | tar -x -C /tmp/native
+RUN curl -Ls http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64-2.7.1.tar | tar -x -C /tmp/native
 
 # hadoop
-RUN curl -s http://www.eu.apache.org/dist/hadoop/common/hadoop-2.7.0/hadoop-2.7.0.tar.gz | tar -xz -C /usr/local/
-RUN cd /usr/local && ln -s ./hadoop-2.7.0 hadoop
+RUN curl -s http://www.eu.apache.org/dist/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz | tar -xz -C /usr/local/
+RUN cd /usr/local && ln -s ./hadoop-2.7.1 hadoop
 
 ENV HADOOP_PREFIX /usr/local/hadoop
 ENV HADOOP_COMMON_HOME /usr/local/hadoop
@@ -106,4 +106,4 @@ EXPOSE 19888
 #Yarn ports
 EXPOSE 8030 8031 8032 8033 8040 8042 8088
 #Other ports
-EXPOSE 49707 2122   
+EXPOSE 49707 2122
