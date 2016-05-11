@@ -8,6 +8,7 @@ MAINTAINER SequenceIQ
 USER root
 
 # install dev tools
+RUN apt-get update
 RUN apt-get install -y curl tar sudo openssh-server openssh-client rsync
 
 # passwordless ssh
