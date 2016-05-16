@@ -1,4 +1,4 @@
-# Creates pseudo distributed hadoop 2.5.0
+# Creates pseudo distributed hadoop 2.7.0
 #
 # docker build -t sequenceiq/hadoop .
 
@@ -8,6 +8,7 @@ MAINTAINER SequenceIQ
 USER root
 
 # install dev tools
+RUN apt-get update
 RUN apt-get install -y curl tar sudo openssh-server openssh-client rsync
 
 # passwordless ssh
@@ -20,15 +21,15 @@ RUN cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
 
 # java
 RUN mkdir -p /usr/java/default && \
-    curl -Ls 'http://download.oracle.com/otn-pub/java/jdk/7u51-b13/jdk-7u51-linux-x64.tar.gz' -H 'Cookie: oraclelicense=accept-securebackup-cookie' | \
+    curl -Ls 'http://192.168.1.166:8000/jdk-8u73-linux-x64.tar.gz' -H 'Cookie: oraclelicense=accept-securebackup-cookie' | \
     tar --strip-components=1 -xz -C /usr/java/default/
 
 ENV JAVA_HOME /usr/java/default/
 ENV PATH $PATH:$JAVA_HOME/bin
 
 # hadoop
-RUN curl -s http://www.eu.apache.org/dist/hadoop/common/hadoop-2.5.0/hadoop-2.5.0.tar.gz | tar -xz -C /usr/local/
-RUN cd /usr/local && ln -s ./hadoop-2.5.0 hadoop
+RUN curl -s http://192.168.1.166:8000/hadoop-2.7.0.tar.gz | tar -xz -C /usr/local/
+RUN cd /usr/local && ln -s ./hadoop-2.7.0 hadoop
 
 ENV HADOOP_PREFIX /usr/local/hadoop
 RUN sed -i '/^export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/java/default\nexport HADOOP_PREFIX=/usr/local/hadoop\nexport HADOOP_HOME=/usr/local/hadoop\n:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
@@ -50,7 +51,7 @@ RUN $HADOOP_PREFIX/bin/hdfs namenode -format
 
 # fixing the libhadoop.so like a boss
 RUN rm  /usr/local/hadoop/lib/native/*
-RUN curl -Ls http://dl.bintray.com/sequenceiq/sequenceiq-bin/hadoop-native-64-2.5.0.tar|tar -xz -C /usr/local/hadoop/lib/native/
+RUN curl -Ls http://192.168.1.166:8000/hadoop-native-64-2.7.0.tar|tar -x -C /usr/local/hadoop/lib/native/
 
 ADD ssh_config /root/.ssh/config
 RUN chmod 600 /root/.ssh/config
