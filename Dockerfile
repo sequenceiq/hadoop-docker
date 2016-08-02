@@ -4,6 +4,7 @@
 
 FROM sequenceiq/pam:centos-6.5
 MAINTAINER SequenceIQ
+ARG JAVA_URL=http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jdk-8u65-linux-x64.rpm
 
 USER root
 
@@ -22,10 +23,10 @@ RUN cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
 
 
 # java
-RUN curl -LO 'http://download.oracle.com/otn-pub/java/jdk/7u71-b14/jdk-7u71-linux-x64.rpm' -H 'Cookie: oraclelicense=accept-securebackup-cookie'
-RUN rpm -i jdk-7u71-linux-x64.rpm
-RUN rm jdk-7u71-linux-x64.rpm
-
+RUN DIR=$(mktemp -d) && cd ${DIR} && \
+      curl -LO ${JAVA_URL} -H 'Cookie: oraclelicense=accept-securebackup-cookie' && \
+      rpm -i ${DIR}/*.rpm && \
+      rm -rf ${DIR}
 ENV JAVA_HOME /usr/java/default
 ENV PATH $PATH:$JAVA_HOME/bin
 RUN rm /usr/bin/java && ln -s $JAVA_HOME/bin/java /usr/bin/java
