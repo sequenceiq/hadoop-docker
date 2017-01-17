@@ -1,4 +1,4 @@
-#Apache Hadoop 2.7.1 Docker image
+# Apache Hadoop 2.7.1 Docker image
 
 [![DockerPulls](https://img.shields.io/docker/pulls/sequenceiq/hadoop-docker.svg)](https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/)
 [![DockerStars](https://img.shields.io/docker/stars/sequenceiq/hadoop-docker.svg)](https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/)
