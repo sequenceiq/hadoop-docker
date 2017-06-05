@@ -32,7 +32,7 @@ docker pull sequenceiq/hadoop-docker:2.7.1
 
 # Start a container
 
-In order to use the Docker image you have just build or pulled use:
+In order to use the Docker image you have just built or pulled use:
 
 **Make sure that SELinux is disabled on the host. If you are using boot2docker you don't need to do anything.**
 
