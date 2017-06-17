@@ -22,7 +22,7 @@ RUN cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
 
 
 # java
-RUN yum -y install java-1.8.0-openjdk-devel.x86_64 maven ant && yum clean all
+RUN yum -y install java-1.8.0-openjdk-devel.x86_64 && yum clean all
 COPY java_env.sh /etc/profile.d/java_env.sh
 
 # download native support
