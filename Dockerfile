@@ -56,8 +56,10 @@ ADD hdfs-site.xml $HADOOP_PREFIX/etc/hadoop/hdfs-site.xml
 ADD mapred-site.xml $HADOOP_PREFIX/etc/hadoop/mapred-site.xml
 ADD yarn-site.xml $HADOOP_PREFIX/etc/hadoop/yarn-site.xml
 
-# add tez-site
+# prepare tez installation
 ADD tez-site.xml $HADOOP_PREFIX/etc/hadoop/tez-site.xml
+RUN mkdir -p /root/tez
+RUN curl -s http://www-eu.apache.org/dist/tez/0.8.5/apache-tez-0.8.5-bin.tar.gz | tar -xz -C /root/tez
 
 RUN $HADOOP_PREFIX/bin/hdfs namenode -format
 

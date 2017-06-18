@@ -19,8 +19,6 @@ $HADOOP_PREFIX/sbin/start-yarn.sh
 $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh start historyserver
 
 # install Tez
-mkdir -p /root/tez
-curl -s http://www-eu.apache.org/dist/tez/0.8.5/apache-tez-0.8.5-bin.tar.gz | tar -xz -C /root/tez
 export PATH=$HADOOP_PREFIX/sbin:$HADOOP_PREFIX/bin:$PATH
 hadoop fs -copyFromLocal /root/tez/apache-tez-0.8.5-bin/share/tez.tar.gz /apps/apache-tez-0.8.5-bin.tar.gz
 export TEZ_CONF_DIR=/usr/local/hadoop/etc/hadoop/
