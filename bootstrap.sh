@@ -20,9 +20,10 @@ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh start historyserver
 
 # install Tez
 export PATH=$HADOOP_PREFIX/sbin:$HADOOP_PREFIX/bin:$PATH
+hadoop fs -mkdir /apps
 hadoop fs -copyFromLocal /root/tez/apache-tez-0.8.5-bin/share/tez.tar.gz /apps/apache-tez-0.8.5-bin.tar.gz
 export TEZ_CONF_DIR=/usr/local/hadoop/etc/hadoop/
-export TEZ_JARS=/root/apache-tez-0.8.5-bin
+export TEZ_JARS=/root/tez/apache-tez-0.8.5-bin
 export HADOOP_CLASSPATH=${TEZ_CONF_DIR}:${TEZ_JARS}/*:${TEZ_JARS}/lib/*
 
 if [[ $1 == "-d" ]]; then
