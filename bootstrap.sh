@@ -21,7 +21,7 @@ $HADOOP_PREFIX/sbin/mr-jobhistory-daemon.sh start historyserver
 # install Tez
 export PATH=$HADOOP_PREFIX/sbin:$HADOOP_PREFIX/bin:$PATH
 hdfs dfsadmin -safemode wait
-hadoop fs -mkdir /apps
+hadoop fs -mkdir -p /apps/tez
 hadoop fs -copyFromLocal /root/tez/apache-tez-0.8.5-bin/share/tez.tar.gz /apps/apache-tez-0.8.5-bin.tar.gz
 export TEZ_CONF_DIR=/usr/local/hadoop/etc/hadoop/
 export TEZ_JARS=/root/tez/apache-tez-0.8.5-bin

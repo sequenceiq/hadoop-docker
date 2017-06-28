@@ -527,6 +527,7 @@ limitations under the License.
 
  All duplicate resources are ignored.</description>
     <type>string</type>
+    <value>${fs.defaultFS}/apps/tez</value>
   </property>
 
   <property>
