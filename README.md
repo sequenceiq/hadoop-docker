@@ -1,3 +1,5 @@
+[![Docker Build Statu](https://img.shields.io/docker/build/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/ouyi/hadoop-docker/)
+
 # Apache Hadoop 2.7.1 in a Docker container
 
 Hadoop in a pseudo distributed mode in a Docker container, forked from [sequenceiq](https://github.com/sequenceiq/hadoop-docker). The added values are:
