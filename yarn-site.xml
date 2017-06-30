@@ -29,4 +29,25 @@
     <value>600</value>
   </property>
 
+  <property>
+<name>yarn.nodemanager.resource.memory-mb</name>
+<value>2048</value>
+  </property>
+
+  <property>
+    <name>yarn.scheduler.minimum-allocation-mb</name>
+    <value>128</value>
+  </property>
+
+  <property>
+    <name>yarn.nodemanager.vmem-pmem-ratio</name>
+    <value>1.5</value>
+  </property>
+
+  <property>
+    <name>yarn.nodemanager.vmem-check-enabled</name>
+    <value>false</value>
+    <description>Whether virtual memory limits will be enforced for containers</description>
+  </property>
+
 </configuration>

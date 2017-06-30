@@ -1,0 +1,1151 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements. See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License. You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<!-- WARNING: THIS IS A GENERATED TEMPLATE PURELY FOR DOCUMENTATION PURPOSES
+ AND SHOULD NOT BE USED AS A CONFIGURATION FILE FOR TEZ -->
+
+<configuration>
+
+  <property>
+    <name>tez.dag.recovery.enabled</name>
+    <defaultValue>true</defaultValue>
+    <description>Boolean value. Enable recovery of DAGs. This allows a restarted app master to recover the 
+ incomplete DAGs from the previous instance of the app master.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.dag.recovery.io.buffer.size</name>
+    <defaultValue>8192</defaultValue>
+    <description>Int value. Size in bytes for the IO buffer size while processing the recovery file.
+ Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.dag.recovery.flush.interval.secs</name>
+    <defaultValue>30</defaultValue>
+    <description>Int value. Interval, in seconds, between flushing recovery data to the recovery log.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.dag.recovery.max.unflushed.events</name>
+    <defaultValue>100</defaultValue>
+    <description>Int value. Number of recovery events to buffer before flushing them to the recovery log.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.task.heartbeat.timeout.check-ms</name>
+    <defaultValue>30000</defaultValue>
+    <description>Int value. Time interval, in milliseconds, between checks for lost tasks.
+ Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.task.timeout-ms</name>
+    <defaultValue>300000</defaultValue>
+    <description>Int value. Time interval, in milliseconds, within which a task must heartbeat to the app master
+ before its considered lost.
+ Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.acls.enabled</name>
+    <defaultValue>true</defaultValue>
+    <description>Boolean value. Configuration to enable/disable ACL checks.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.allow.disabled.timeline-domains</name>
+    <defaultValue>false</defaultValue>
+    <description>Boolean value.
+ Allow disabling of Timeline Domains even if Timeline is being used.</description>
+    <type>boolean</type>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.am.client.am.port-range</name>
+    <description>String value. Range of ports that the AM can use when binding for client connections. Leave blank
+ to use all possible ports. Expert level setting. It&apos;s hadoop standard range configuration.
+ For example 50000-50050,50100-50200</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.am.client.am.thread-count</name>
+    <defaultValue>1</defaultValue>
+    <description>Int value. Number of threads to handle client RPC requests. Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.commit-all-outputs-on-dag-success</name>
+    <defaultValue>true</defaultValue>
+    <description>Boolean value. Determines when the final outputs to data sinks are committed. Commit is an
+ output specific operation and typically involves making the output visible for consumption. 
+ If the config is true, then the outputs are committed at the end of DAG completion after all 
+ constituent vertices have completed. If false, outputs for each vertex are committed after that 
+ vertex succeeds. Depending on the desired output visibility and downstream consumer dependencies
+ this value must be appropriately chosen. Defaults to the safe choice of true.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.am.containerlauncher.thread-count-limit</name>
+    <defaultValue>500</defaultValue>
+    <description>Int value. Upper limit on the number of threads user to launch containers in the app
+ master. Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.container.idle.release-timeout-max.millis</name>
+    <defaultValue>10000</defaultValue>
+    <description>Int value. The maximum amount of time to hold on to a container if no task can be
+ assigned to it immediately. Only active when reuse is enabled. The value
+ must be +ve and &gt;=
+ TezConfiguration#TEZ_AM_CONTAINER_IDLE_RELEASE_TIMEOUT_MIN_MILLIS.
+ Containers will have an expire time set to a random value between
+ TezConfiguration#TEZ_AM_CONTAINER_IDLE_RELEASE_TIMEOUT_MIN_MILLIS &amp;&amp;
+ TezConfiguration#TEZ_AM_CONTAINER_IDLE_RELEASE_TIMEOUT_MAX_MILLIS. This 
+ creates a graceful reduction in the amount of idle resources held</description>
+    <type>long</type>
+  </property>
+
+  <property>
+    <name>tez.am.container.idle.release-timeout-min.millis</name>
+    <defaultValue>5000</defaultValue>
+    <description>Int value. The minimum amount of time to hold on to a container that is idle. Only active when 
+ reuse is enabled. Set to -1 to never release idle containers (not recommended).</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.container.reuse.enabled</name>
+    <defaultValue>true</defaultValue>
+    <description>Boolean value. Configuration to specify whether container should be reused across tasks.
+ This improves performance by not incurring recurring launch overheads.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.am.container.reuse.locality.delay-allocation-millis</name>
+    <defaultValue>250</defaultValue>
+    <description>Int value. The amount of time to wait before assigning a container to the next level
+ of locality. NODE -&gt; RACK -&gt; NON_LOCAL. Delay scheduling parameter. Expert level setting.</description>
+    <type>long</type>
+  </property>
+
+  <property>
+    <name>tez.am.container.reuse.non-local-fallback.enabled</name>
+    <defaultValue>false</defaultValue>
+    <description>Boolean value. Whether to reuse containers for non-local tasks. Active only if reuse is
+ enabled. Turning this on can severely affect locality and can be bad for jobs with high data 
+ volume being read from the primary data sources.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.am.container.reuse.rack-fallback.enabled</name>
+    <defaultValue>true</defaultValue>
+    <description>Boolean value. Whether to reuse containers for rack local tasks. Active only if reuse is
+ enabled.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.am.credentials-merge</name>
+    <description>Boolean value. If true then Tez will add the ApplicationMaster credentials
+ to all task credentials.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.am.dag.scheduler.class</name>
+    <defaultValue>org.apache.tez.dag.app.dag.impl.DAGSchedulerNaturalOrder</defaultValue>
+    <description>String value. The class to be used for DAG Scheduling. Expert level setting.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.am.disable.client-version-check</name>
+    <defaultValue>false</defaultValue>
+    <description>Boolean value.
+ Disable version check between client and AM/DAG. Default false.</description>
+    <type>boolean</type>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.am.inline.task.execution.enabled</name>
+    <defaultValue>false</defaultValue>
+    <description>Tez AM Inline Mode flag. Not valid till Tez-684 get checked-in</description>
+    <type>boolean</type>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.am.inline.task.execution.max-tasks</name>
+    <defaultValue>1</defaultValue>
+    <description>Int value.
+ The maximium number of tasks running in parallel within the app master process.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.launch.cluster-default.cmd-opts</name>
+    <defaultValue>-server -Djava.net.preferIPv4Stack=true -Dhadoop.metrics.log.level=WARN</defaultValue>
+    <description>String value. Command line options which will be prepended to {@link #TEZ_AM_LAUNCH_CMD_OPTS}
+ during the launch of the AppMaster process. This property will typically be configured to
+ include default options meant to be used by all jobs in a cluster. If required, the values can
+ be overridden per job.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.am.launch.cluster-default.env</name>
+    <description>String value. Env settings will be merged with {@link #TEZ_AM_LAUNCH_ENV}
+ during the launch of the AppMaster process. This property will typically be configured to
+ include default system env meant to be used by all jobs in a cluster. If required, the values can
+ be appended to per job.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.am.launch.cmd-opts</name>
+    <defaultValue>-XX:+PrintGCDetails -verbose:gc -XX:+PrintGCTimeStamps -XX:+UseNUMA -XX:+UseParallelGC</defaultValue>
+    <description>String value. Command line options provided during the launch of the Tez
+ AppMaster process. Its recommended to not set any Xmx or Xms in these launch opts so that
+ Tez can determine them automatically.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.am.launch.env</name>
+    <description>String value. Env settings for the Tez AppMaster process.
+ Should be specified as a comma-separated of key-value pairs where each pair
+ is defined as KEY=VAL
+ e.g. &quot;LD_LIBRARY_PATH=.,USERNAME=foo&quot;
+ These take least precedence compared to other methods of setting env.
+ These get added to the app master environment prior to launching it.
+ This setting will prepend existing settings in the cluster default</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.am.legacy.speculative.slowtask.threshold</name>
+    <description>Float value. Specifies how many standard deviations away from the mean task execution time 
+ should be considered as an outlier/slow task.</description>
+    <type>float</type>
+    <unstable>true</unstable>
+  </property>
+
+  <property>
+    <name>tez.am.log.level</name>
+    <defaultValue>INFO</defaultValue>
+    <description>Root Logging level passed to the Tez app master.
+
+ Simple configuration: Set the log level for all loggers.
+   e.g. INFO
+   This sets the log level to INFO for all loggers.
+
+ Advanced configuration: Set the log level for all classes, along with a different level for some.
+   e.g. DEBUG;org.apache.hadoop.ipc=INFO;org.apache.hadoop.security=INFO
+   This sets the log level for all loggers to DEBUG, expect for the
+   org.apache.hadoop.ipc and org.apache.hadoop.security, which are set to INFO
+
+ Note: The global log level must always be the first parameter.
+   DEBUG;org.apache.hadoop.ipc=INFO;org.apache.hadoop.security=INFO is valid
+   org.apache.hadoop.ipc=INFO;org.apache.hadoop.security=INFO is not valid</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.am.max.allowed.time-sec.for-read-error</name>
+    <defaultValue>300</defaultValue>
+    <description>int value. Represents the maximum time in seconds for which a consumer attempt can report 
+ a read error against its producer attempt, after which the producer attempt will be re-run 
+ to re-generate the output. There are other heuristics which determine the retry and mainly 
+ try to guard against a flurry of re-runs due to intermittent read errors 
+ (due to network issues). This configuration puts a time limit on those heuristics to ensure
+ jobs dont hang indefinitely due to lack of closure in those heuristics 
+
+ Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.max.app.attempts</name>
+    <defaultValue>2</defaultValue>
+    <description>Int value. Specifies the number of times the app master can be launched in order to recover 
+ from app master failure. Typically app master failures are non-recoverable. This parameter 
+ is for cases where the app master is not at fault but is lost due to system errors.
+ Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.maxtaskfailures.per.node</name>
+    <defaultValue>10</defaultValue>
+    <description>Int value. Specifies the number of task failures on a node before the node is considered faulty.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.modify-acls</name>
+    <description>String value.
+ AM modify ACLs. This allows the specified users/groups to run modify operations on the AM
+ such as submitting DAGs, pre-warming the session, killing DAGs or shutting down the session.
+ Comma separated list of users, followed by whitespace, followed by a comma separated list of 
+ groups</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.am.node-blacklisting.enabled</name>
+    <defaultValue>true</defaultValue>
+    <description>Boolean value. Enabled blacklisting of nodes of nodes that are considered faulty. These nodes 
+ will not be used to execute tasks.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.am.node-blacklisting.ignore-threshold-node-percent</name>
+    <defaultValue>33</defaultValue>
+    <description>Int value. Specifies the percentage of nodes in the cluster that may be considered faulty.
+ This limits the number of nodes that are blacklisted in an effort to minimize the effects of 
+ temporary surges in failures (e.g. due to network outages).</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.node-unhealthy-reschedule-tasks</name>
+    <defaultValue>false</defaultValue>
+    <description>Boolean value. Enable task rescheduling for node updates.
+ When enabled the task scheduler will reschedule task attempts that
+ are associated with an unhealthy node to avoid potential data transfer
+ errors from downstream tasks.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.am.preemption.heartbeats-between-preemptions</name>
+    <defaultValue>3</defaultValue>
+    <description>Int value. The number of RM heartbeats to wait after preempting running tasks before preempting
+ more running tasks. After preempting a task, we need to wait at least 1 heartbeat so that the 
+ RM can act on the released resources and assign new ones to us. Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.preemption.max.wait-time-ms</name>
+    <defaultValue>60000</defaultValue>
+    <description>Int value. Time (in millisecs) that an unsatisfied request will wait before preempting other
+ resources. In rare cases, the cluster says there are enough free resources but does not end 
+ up getting enough on a node to actually assign it to the job. This configuration tries to put 
+ a deadline on such wait to prevent indefinite job hangs.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.preemption.percentage</name>
+    <defaultValue>10</defaultValue>
+    <description>Int value. Specifies the percentage of tasks eligible to be preempted that
+ will actually be preempted in a given round of Tez internal preemption.
+ This slows down preemption and gives more time for free resources to be
+ allocated by the cluster (if any) and gives more time for preemptable tasks
+ to finish. Valid values are 0-100. Higher values will preempt quickly at
+ the cost of losing work. Setting to 0 turns off preemption. Expert level
+ setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.resource.cpu.vcores</name>
+    <defaultValue>1</defaultValue>
+    <description>Int value. The number of virtual cores to be used by the app master</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.resource.memory.mb</name>
+    <defaultValue>1024</defaultValue>
+    <description>Int value. The amount of memory in MB to be used by the AppMaster</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.am-rm.heartbeat.interval-ms.max</name>
+    <defaultValue>1000</defaultValue>
+    <description>Int value. The maximum heartbeat interval between the AM and RM in milliseconds
+ Increasing this reduces the communication between the AM and the RM and can
+ help in scaling up. Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.session.min.held-containers</name>
+    <defaultValue>0</defaultValue>
+    <description>Int value. The minimum number of containers that will be held in session mode. Not active in 
+ non-session mode. Enables an idle session (not running any DAG) to hold on to a minimum number
+ of containers to provide fast response times for the next DAG.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.mode.session</name>
+    <defaultValue>false</defaultValue>
+    <description>Boolean value. Execution mode for the Tez application. True implies session mode. If the client
+ code is written according to best practices then the same code can execute in either mode based
+ on this configuration. Session mode is more aggressive in reserving execution resources and is
+ typically used for interactive applications where multiple DAGs are submitted in quick succession
+ by the same user. For long running applications, one-off executions, batch jobs etc non-session 
+ mode is recommended. If session mode is enabled then container reuse is recommended.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.am.speculation.enabled</name>
+    <defaultValue>false</defaultValue>
+    <type>boolean</type>
+    <unstable>true</unstable>
+  </property>
+
+  <property>
+    <name>tez.staging-dir</name>
+    <description>String value. Specifies a directory where Tez can create temporary job artifacts.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.am.staging.scratch-data.auto-delete</name>
+    <defaultValue>true</defaultValue>
+    <description>Boolean value. If true then Tez will try to automatically delete temporary job 
+ artifacts that it creates within the specified staging dir. Does not affect any user data.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.am.task.listener.thread-count</name>
+    <defaultValue>30</defaultValue>
+    <description>Int value. The number of threads used to listen to task heartbeat requests.
+ Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.task.max.failed.attempts</name>
+    <defaultValue>4</defaultValue>
+    <description>Int value. The maximum number of attempts that can fail for a particular task before the task is failed. 
+ This does not count killed attempts. Task failure results in DAG failure.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.tez-ui.history-url.template</name>
+    <defaultValue>__HISTORY_URL_BASE__/#/tez-app/__APPLICATION_ID__</defaultValue>
+    <description>String value
+ Tez UI URL template for the application.
+ Expert level setting.
+
+ The AM will redirect the user to the Tez UI via this url. Template supports the following
+ parameters to be replaced with the actual runtime information:
+
+   __APPLICATION_ID__ : Replaces this with application ID
+   __HISTORY_URL_BASE__: replaces this with TEZ_HISTORY_URL_BASE
+
+   For example, &quot;http://uihost:9001/#/tez-app/__APPLICATION_ID__/ will be replaced to
+   http://uihost:9001/#/tez-app/application_1421880306565_0001/</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.am.vertex.max-task-concurrency</name>
+    <defaultValue>-1</defaultValue>
+    <description>Int value. The maximum number of attempts that can run concurrently for a given vertex.
+ Setting &lt;=0 implies no limit</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.am.view-acls</name>
+    <description>String value. 
+ AM view ACLs. This allows the specified users/groups to view the status of the AM and all DAGs
+ that run within this AM.
+ Comma separated list of users, followed by whitespace, followed by a comma separated list of 
+ groups</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.am.tez-ui.webservice.enable</name>
+    <defaultValue>true</defaultValue>
+    <description>String value
+ Allow disabling of the Tez AM webservice. If set to false the Tez-UI wont show progress
+ updates for running application.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.application.tags</name>
+    <description>String value. Tags for the job that will be passed to YARN at submission
+ time. Queries to YARN for applications can filter on these tags.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.aux.uris</name>
+    <description>Auxiliary resources to be localized for the Tez AM and all its containers.
+
+ Value is comma-separated list of fully-resolved directories or file paths. All resources
+ are made available into the working directory of the AM and/or containers i.e. $CWD.
+
+ If directories are specified, they are not traversed recursively. Only files directly under the
+ specified directory are localized.
+
+ All duplicate resources are ignored.</description>
+    <type>string</type>
+    <value>${fs.defaultFS}/apps/tez</value>
+  </property>
+
+  <property>
+    <name>tez.cancel.delegation.tokens.on.completion</name>
+    <defaultValue>true</defaultValue>
+    <type>boolean</type>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.client.asynchronous-stop</name>
+    <defaultValue>true</defaultValue>
+    <description>Boolean value. Backwards compatibility setting. Changes TezClient stop to be a
+ synchronous call waiting until AM is in a final state before returning to the user.
+ Expert level setting.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.client.diagnostics.wait.timeout-ms</name>
+    <defaultValue>3000</defaultValue>
+    <description>Long value
+ Time to wait (in milliseconds) for yarn app&apos;s diagnotics is available
+ Workaround for YARN-2560</description>
+    <type>long</type>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.client.timeout-ms</name>
+    <defaultValue>30000</defaultValue>
+    <description>Long value. Time interval, in milliseconds, for client to wait during client-requested
+ AM shutdown before issuing a hard kill to the RM for this application.
+ Expert level setting.</description>
+    <type>long</type>
+  </property>
+
+  <property>
+    <name>tez.java.opts.checker.class</name>
+    <description>String value.
+ Ability to provide a different implementation to check/verify java opts defined
+ for vertices/tasks.
+ Class has to be an instance of JavaOptsChecker</description>
+    <type>string</type>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.java.opts.checker.enabled</name>
+    <defaultValue>true</defaultValue>
+    <description>Boolean value. Default true.
+ Ability to disable the Java Opts Checker</description>
+    <type>boolean</type>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.container.max.java.heap.fraction</name>
+    <defaultValue>0.8</defaultValue>
+    <description>Double value. Tez automatically determines the Xmx for the JVMs used to run
+ Tez tasks and app masters. This feature is enabled if the user has not
+ specified Xmx or Xms values in the launch command opts. Doing automatic Xmx
+ calculation is preferred because Tez can determine the best value based on
+ actual allocation of memory to tasks the cluster. The value if used as a
+ fraction that is applied to the memory allocated Factor to size Xmx based
+ on container memory size. Value should be greater than 0 and less than 1.</description>
+    <type>float</type>
+  </property>
+
+  <property>
+    <name>tez.counters.counter-name.max-length</name>
+    <defaultValue>64</defaultValue>
+    <description>Int value. Configuration to limit the length of counter names. This can be used to
+ limit the amount of memory being used in the app master to store the
+ counters. Expert level setting.</description>
+    <type>integer</type>
+    <unstable>true</unstable>
+  </property>
+
+  <property>
+    <name>tez.counters.group-name.max-length</name>
+    <defaultValue>256</defaultValue>
+    <description>Int value. Configuration to limit the counter group names per app master. This can be used to
+ limit the amount of memory being used in the app master to store the
+ counters. Expert level setting.</description>
+    <type>integer</type>
+    <unstable>true</unstable>
+  </property>
+
+  <property>
+    <name>tez.counters.max</name>
+    <defaultValue>1200</defaultValue>
+    <description>Int value. Configuration to limit the counters per dag (AppMaster and Task). This can be used
+ to
+ limit the amount of memory being used in the app master to store the
+ counters. Expert level setting.</description>
+    <type>integer</type>
+    <unstable>true</unstable>
+  </property>
+
+  <property>
+    <name>tez.counters.max.groups</name>
+    <defaultValue>500</defaultValue>
+    <description>Int value. Configuration to limit the number of counter groups for a DAG. This can be used to
+ limit the amount of memory being used in the app master to store the
+ counters. Expert level setting.</description>
+    <type>integer</type>
+    <unstable>true</unstable>
+  </property>
+
+  <property>
+    <name>tez.credentials.path</name>
+    <description>String value that is a file path.
+ Path to a credentials file (with serialized credentials) located on the local file system.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.dag.status.pollinterval-ms</name>
+    <defaultValue>500</defaultValue>
+    <description>Long value
+ Status Poll interval in Milliseconds used when getting DAG status with timeout.</description>
+    <type>long</type>
+  </property>
+
+  <property>
+    <name>tez.generate.debug.artifacts</name>
+    <defaultValue>false</defaultValue>
+    <type>boolean</type>
+    <unstable>true</unstable>
+  </property>
+
+  <property>
+    <name>tez.history.logging.log.level</name>
+    <description>Enum value. Config to limit the type of events published to the history logging service.
+ The valid log levels are defined in the enum {@link HistoryLogLevel}. The default value is
+ defined in {@link HistoryLogLevel#DEFAULT}.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.history.logging.service.class</name>
+    <defaultValue>org.apache.tez.dag.history.logging.impl.SimpleHistoryLoggingService</defaultValue>
+    <description>String value that is a class name.
+ Specify the class to use for logging history data.
+ To disable, set this to &quot;org.apache.tez.dag.history.logging.impl.DevNullHistoryLoggingService&quot;</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.history.logging.taskattempt-filters</name>
+    <description>List of comma separated enum values. Specifies the list of task attempt termination causes,
+ which have to be suppressed from being logged to ATS. The valid filters are defined in the
+ enum TaskAttemptTerminationCause. The filters are applied only if tez.history.logging.log.level
+ is set to TASK_ATTEMPT.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.history.logging.timeline-cache-plugin.old-num-dags-per-group</name>
+    <description>Comma separated list of Integers. These are the values that were set for the config value
+ for {@value #TEZ_HISTORY_LOGGING_TIMELINE_NUM_DAGS_PER_GROUP}. The older values are required so
+ that the groupIds generated previously will continue to be generated by the plugin. If an older
+ value is not present then the UI may not show information for DAGs which were created
+ with a different grouping value.
+
+ Note: Do not add too many values here as it will affect the performance of Yarn Timeline
+ Server/Tez UI due to the need to scan for more log files.</description>
+    <type>string</type>
+    <unstable>true</unstable>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.history.logging.timeline.num-dags-per-group</name>
+    <defaultValue>1</defaultValue>
+    <description>Integer value. Number of DAGs to be grouped together. This is used by the history logging
+ service to generate groupIds such that numDagsPerGroup will have same groupId in a given
+ session. If the value is set to 1 then we disable grouping. This config is used to control the
+ number of DAGs written into one log file, and hence controls number of files created in
+ the Filesystem used by YARN Timeline.</description>
+    <type>integer</type>
+    <unstable>true</unstable>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.tez-ui.history-url.base</name>
+    <description>String value
+ Tez-UI Url base. This gets replaced in the TEZ_AM_TEZ_UI_HISTORY_URL_TEMPLATE
+ ex http://ui-host:9001 or if its hosted with a prefix http://ui-host:9001/~user
+ if the ui is hosted on the default port (80 for http and 443 for https), the port should not
+ be specified.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.ignore.lib.uris</name>
+    <description>Boolean value. Allows to ignore &apos;tez.lib.uris&apos;. Useful during development as well as 
+ raw Tez application where classpath is propagated with application
+ via {@link LocalResource}s. This is mainly useful for developer/debugger scenarios.</description>
+    <type>boolean</type>
+    <unstable>true</unstable>
+  </property>
+
+  <property>
+    <name>tez.ipc.payload.reserved.bytes</name>
+    <defaultValue>5242880</defaultValue>
+    <description>Int value. SubmitDAGPlanRequest cannot be larger than Max IPC message size minus this number; otherwise, it will
+ be serialized to HDFS and we transfer the path to server. Server will deserialize the request from HDFS.</description>
+    <type>int</type>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.tez.jvm.system-properties-to-log</name>
+    <description>String value. Determines what JVM properties will be logged for debugging purposes
+ in the AM and Task runtime logs.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.lib.uris</name>
+    <description>String value to a file path.
+ The location of the Tez libraries which will be localized for DAGs.
+ This follows the following semantics
+ &lt;ol&gt;
+ &lt;li&gt; To use .tar.gz or .tgz files (generated by the tez or hadoop builds), the full path to this
+ file (including filename) should be specified. The internal structure of the uncompressed tgz
+ will be defined by &apos;tez.lib.uris.classpath&apos;&lt;/li&gt;
+
+ &lt;li&gt; If a single file is specified without the above mentioned extensions - it will be treated as
+ a regular file. This means it will not be uncompressed during runtime. &lt;/li&gt;
+
+ &lt;li&gt; If multiple entries exist
+ &lt;ul&gt;
+ &lt;li&gt; Regular Files: will be treated as regular files (not uncompressed during runtime) &lt;/li&gt;
+ &lt;li&gt; Archive Files: will be treated as archives and will be uncompressed during runtime &lt;/li&gt;
+ &lt;li&gt; Directories: all files under the directory (non-recursive) will be made available (but not
+ uncompressed during runtime). &lt;/li&gt;
+ &lt;/ul&gt;
+ &lt;/ol&gt;</description>
+    <type>string</type>
+    <value>${fs.defaultFS}/apps/apache-tez-0.8.5-bin.tar.gz</value>
+  </property>
+
+  <property>
+    <name>tez.lib.uris.classpath</name>
+    <description>Specify additional user classpath information to be used for Tez AM and all containers.
+ This will be appended to the classpath after PWD
+ 
+ &apos;tez.lib.uris.classpath&apos; defines the relative classpath into the archives
+ that are set in &apos;tez.lib.uris&apos;</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.local.mode</name>
+    <defaultValue>false</defaultValue>
+    <description>Boolean value. Enable local mode execution in Tez. Enables tasks to run in the same process as
+  the app master. Primarily used for debugging.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.queue.name</name>
+    <description>String value. The queue name for all jobs being submitted from a given client.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.session.am.dag.submit.timeout.secs</name>
+    <defaultValue>300</defaultValue>
+    <description>Int value. Time (in seconds) for which the Tez AM should wait for a DAG to be submitted before
+ shutting down. Only relevant in session mode. Any negative value will disable this check and
+ allow the AM to hang around forever in idle mode.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.session.client.timeout.secs</name>
+    <defaultValue>120</defaultValue>
+    <description>Int value. Time (in seconds) to wait for AM to come up when trying to submit a DAG
+ from the client. Only relevant in session mode. If the cluster is busy and cannot launch the 
+ AM then this timeout may be hit. In those case, using non-session mode is recommended if 
+ applicable. Otherwise increase the timeout (set to -1 for infinity. Not recommended)</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.simple.history.logging.dir</name>
+    <description>String value. The directory into which history data will be written. This defaults to the 
+ container logging directory. This is relevant only when SimpleHistoryLoggingService is being
+ used for {@link TezConfiguration#TEZ_HISTORY_LOGGING_SERVICE_CLASS}</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.simple.history.max.errors</name>
+    <defaultValue>10</defaultValue>
+    <description>Int value. Maximum errors allowed while logging history data. After crossing this limit history
+ logging gets disabled. The job continues to run after this.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.task.am.heartbeat.counter.interval-ms.max</name>
+    <defaultValue>4000</defaultValue>
+    <description>Int value. Interval, in milliseconds, after which counters are sent to AM in heartbeat from 
+ tasks. This reduces the amount of network traffice between AM and tasks to send high-volume 
+ counters. Improves AM scalability. Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.task.am.heartbeat.interval-ms.max</name>
+    <defaultValue>100</defaultValue>
+    <description>Int value. The maximum heartbeat interval, in milliseconds, between the app master and tasks. 
+ Increasing this can help improve app master scalability for a large number of concurrent tasks.
+ Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.task.generate.counters.per.io</name>
+    <defaultValue>false</defaultValue>
+    <description>Whether to generate counters per IO or not. Enabling this will rename
+ CounterGroups / CounterNames to making them unique per Vertex +
+ Src|Destination</description>
+    <type>boolean</type>
+    <unstable>true</unstable>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.task.get-task.sleep.interval-ms.max</name>
+    <defaultValue>200</defaultValue>
+    <description>Int value. The maximum amount of time, in milliseconds, to wait before a task asks an
+ AM for another task. Increasing this can help improve app master scalability for a large 
+ number of concurrent tasks. Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.task.initialize-processor-first</name>
+    <defaultValue>false</defaultValue>
+    <description>Boolean value. Backwards compatibility setting for initializing IO processor before
+ inputs and outputs.
+ Expert level setting.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.task.initialize-processor-io-serially</name>
+    <defaultValue>false</defaultValue>
+    <description>Boolean value. Backwards compatibility setting for initializing inputs and outputs
+ serially instead of the parallel default.
+ Expert level setting.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.task.launch.cluster-default.cmd-opts</name>
+    <defaultValue>-server -Djava.net.preferIPv4Stack=true -Dhadoop.metrics.log.level=WARN</defaultValue>
+    <description>String value. Command line options which will be prepended to {@link
+ #TEZ_TASK_LAUNCH_CMD_OPTS} during the launch of Tez tasks.  This property will typically be configured to
+ include default options meant to be used by all jobs in a cluster. If required, the values can
+ be overridden per job.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.task.launch.cluster-default.env</name>
+    <description>String value. Env settings will be merged with {@link #TEZ_TASK_LAUNCH_ENV}
+ during the launch of the task process. This property will typically be configured to
+ include default system env meant to be used by all jobs in a cluster. If required, the values can
+ be appended to per job.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.task.launch.cmd-opts</name>
+    <defaultValue>-XX:+PrintGCDetails -verbose:gc -XX:+PrintGCTimeStamps -XX:+UseNUMA -XX:+UseParallelGC</defaultValue>
+    <description>String value. Command line options provided during the launch of Tez Task
+ processes. Its recommended to not set any Xmx or Xms in these launch opts
+ so that Tez can determine them automatically.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.task.launch.env</name>
+    <description>String value. Env settings for the Tez Task processes.
+ Should be specified as a comma-separated of key-value pairs where each pair
+ is defined as KEY=VAL
+ e.g. &quot;LD_LIBRARY_PATH=.,USERNAME=foo&quot;
+ These take least precedence compared to other methods of setting env
+ These get added to the task environment prior to launching it.
+ This setting will prepend existing settings in the cluster default</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.task.log.level</name>
+    <defaultValue>INFO</defaultValue>
+    <description>Root Logging level passed to the Tez tasks.
+
+ Simple configuration: Set the log level for all loggers.
+   e.g. INFO
+   This sets the log level to INFO for all loggers.
+
+ Advanced configuration: Set the log level for all classes, along with a different level for some.
+   e.g. DEBUG;org.apache.hadoop.ipc=INFO;org.apache.hadoop.security=INFO
+   This sets the log level for all loggers to DEBUG, expect for the
+   org.apache.hadoop.ipc and org.apache.hadoop.security, which are set to INFO
+
+ Note: The global log level must always be the first parameter.
+   DEBUG;org.apache.hadoop.ipc=INFO;org.apache.hadoop.security=INFO is valid
+   org.apache.hadoop.ipc=INFO;org.apache.hadoop.security=INFO is not valid</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.task.max-events-per-heartbeat</name>
+    <defaultValue>500</defaultValue>
+    <description>Int value. Maximum number of of events to fetch from the AM by the tasks in a single heartbeat.
+ Expert level setting. Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.task.max-event-backlog</name>
+    <defaultValue>10000</defaultValue>
+    <description>Int value. Maximum number of pending task events before a task will stop
+ asking for more events in the task heartbeat.
+ Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.task.progress.stuck.interval-ms</name>
+    <defaultValue>-1</defaultValue>
+    <description>Long value. Interval, in milliseconds, within which any of the tasks Input/Processor/Output 
+ components need to make successive progress notifications. If the progress is not notified 
+ for this interval then the task will be considered hung and terminated.
+ The value for this config should be larger than {@link TezConfiguration#TASK_HEARTBEAT_TIMEOUT_MS} 
+ and larger than 2 times the value of {@link TezConfiguration#TEZ_TASK_AM_HEARTBEAT_INTERVAL_MS}.
+ A config value &lt;=0 disables this.</description>
+    <type>string</type>
+  </property>
+
+  <property>
+    <name>tez.task.resource.calculator.process-tree.class</name>
+    <type>string</type>
+    <unstable>true</unstable>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.task.resource.cpu.vcores</name>
+    <defaultValue>1</defaultValue>
+    <description>Int value. The number of virtual cores to be used by tasks.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.task.resource.memory.mb</name>
+    <defaultValue>1024</defaultValue>
+    <description>Int value. The amount of memory in MB to be used by tasks. This applies to all tasks across
+ all vertices. Setting it to the same value for all tasks is helpful for container reuse and 
+ thus good for performance typically.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.task.scale.memory.additional-reservation.fraction.max</name>
+    <type>float</type>
+    <unstable>true</unstable>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.task.scale.memory.additional-reservation.fraction.per-io</name>
+    <description>Fraction of available memory to reserve per input/output. This amount is
+ removed from the total available pool before allocation and is for factoring in overheads.</description>
+    <type>float</type>
+    <unstable>true</unstable>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.task.scale.memory.allocator.class</name>
+    <defaultValue>org.apache.tez.runtime.library.resources.WeightedScalingMemoryDistributor</defaultValue>
+    <description>The allocator to use for initial memory allocation</description>
+    <type>string</type>
+    <unstable>true</unstable>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.task.scale.memory.enabled</name>
+    <defaultValue>true</defaultValue>
+    <description>Whether to scale down memory requested by each component if the total
+ exceeds the available JVM memory</description>
+    <type>boolean</type>
+    <unstable>true</unstable>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.task.scale.memory.reserve-fraction</name>
+    <defaultValue>0.3</defaultValue>
+    <description>The fraction of the JVM memory which will not be considered for allocation.
+ No defaults, since there are pre-existing defaults based on different scenarios.</description>
+    <type>double</type>
+    <unstable>true</unstable>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.task.scale.memory.ratios</name>
+    <type>string</type>
+    <unstable>true</unstable>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.task-specific.launch.cmd-opts</name>
+    <description>Additional launch command options to be added for specific tasks.
+ __VERTEX_NAME__ and __TASK_INDEX__ can be specified, which would be replaced at
+ runtime by vertex name and task index.
+ e.g tez.task-specific.launch.cmd-opts=
+ &quot;-agentpath:libpagent.so,dir=/tmp/__VERTEX_NAME__/__TASK_INDEX__&quot;</description>
+    <type>string</type>
+    <unstable>true</unstable>
+  </property>
+
+  <property>
+    <name>tez.task-specific.launch.cmd-opts.list</name>
+    <description>Set of tasks for which specific launch command options need to be added.
+ Format: &quot;vertexName[csv of task ids];vertexName[csv of task ids]..&quot;
+ Valid e.g:
+ v[0,1,2]  - Additional launch-cmd options for tasks 0,1,2 of vertex v
+ v[1,2,3];v2[5,6,7] - Additional launch-cmd options specified for tasks of vertices v and v2.
+ v[1:5,20,30];v2[2:5,60,7] - Additional launch-cmd options for 1,2,3,4,5,20,30 of vertex v; 2,
+ 3,4,5,60,7 of vertex v2
+ Partial ranges like :5, 1: are not supported.
+ v[] - Additional launch-cmd options for all tasks in vertex v</description>
+    <type>string</type>
+    <unstable>true</unstable>
+  </property>
+
+  <property>
+    <name>tez.task-specific.log.level</name>
+    <description>Task specific log level.
+
+ Simple configuration: Set the log level for all loggers.
+   e.g. INFO
+   This sets the log level to INFO for all loggers.
+
+ Advanced configuration: Set the log level for all classes, along with a different level for some.
+   e.g. DEBUG;org.apache.hadoop.ipc=INFO;org.apache.hadoop.security=INFO
+   This sets the log level for all loggers to DEBUG, expect for the
+   org.apache.hadoop.ipc and org.apache.hadoop.security, which are set to INFO
+
+ Note: The global log level must always be the first parameter.
+   DEBUG;org.apache.hadoop.ipc=INFO;org.apache.hadoop.security=INFO is valid
+   org.apache.hadoop.ipc=INFO;org.apache.hadoop.security=INFO is not valid</description>
+    <type>string</type>
+    <unstable>true</unstable>
+  </property>
+
+  <property>
+    <name>tez.test.minicluster.app.wait.on.shutdown.secs</name>
+    <defaultValue>30</defaultValue>
+    <description>Long value.
+ Time to wait (in seconds) for apps to complete on MiniTezCluster shutdown.</description>
+    <type>long</type>
+    <private>true</private>
+  </property>
+
+  <property>
+    <name>tez.use.cluster.hadoop-libs</name>
+    <defaultValue>false</defaultValue>
+    <description>Boolean value.
+ Specify whether hadoop libraries required to run Tez should be the ones deployed on the cluster.
+ This is disabled by default - with the expectation being that tez.lib.uris has a complete
+ tez-deployment which contains the hadoop libraries.</description>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.yarn.ats.acl.domains.auto-create</name>
+    <defaultValue>true</defaultValue>
+    <type>boolean</type>
+  </property>
+
+  <property>
+    <name>tez.yarn.ats.event.flush.timeout.millis</name>
+    <defaultValue>-1</defaultValue>
+    <description>Int value. Time, in milliseconds, to wait while flushing YARN ATS data during shutdown.
+ Expert level setting.</description>
+    <type>long</type>
+  </property>
+
+  <property>
+    <name>tez.yarn.ats.max.events.per.batch</name>
+    <defaultValue>5</defaultValue>
+    <description>Int value. Max no. of events to send in a single batch to ATS.
+ Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+  <property>
+    <name>tez.yarn.ats.max.polling.time.per.event.millis</name>
+    <defaultValue>10</defaultValue>
+    <description>Int value. Time, in milliseconds, to wait for an event before sending a batch to ATS.
+ Expert level setting.</description>
+    <type>integer</type>
+  </property>
+
+</configuration>
