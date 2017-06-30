@@ -1,4 +1,5 @@
 [![Docker Build Statu](https://img.shields.io/docker/build/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/ouyi/hadoop-docker/)
+[![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/ouyi/hadoop-docker/)
 
 # Apache Hadoop 2.7.1 in a Docker container
 
