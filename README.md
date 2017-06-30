@@ -6,7 +6,7 @@ Hadoop in a pseudo distributed mode in a Docker container, forked from [sequence
 - Use openjdk
 - Tez installation
 
-# Start a container
+## Start a container
 
 **Make sure that SELinux is disabled on the host. If you are using boot2docker you don't need to do anything.**
 
