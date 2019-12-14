@@ -7,16 +7,18 @@ MAINTAINER SequenceIQ
 
 USER root
 
+RUN yum history sync 
+RUN yum install -y yum-plugin-ovl; yum clean all
+
 # install dev tools
 RUN yum clean all \
     && rpm --rebuilddb \
-    && yum install -y curl which tar sudo openssh-server openssh-clients rsync \
+    && yum install -y curl which tar sudo openssh-server openssh-clients rsync dos2unix \
 	&& yum clean all \
 	&& yum update -y libselinux \
 	&& yum clean all
 	
 # update libselinux. see https://github.com/sequenceiq/hadoop-docker/issues/14
-# RUN yum update -y libselinux
 
 # passwordless ssh
 RUN ssh-keygen -q -N "" -t dsa -f /etc/ssh/ssh_host_dsa_key
@@ -26,12 +28,17 @@ RUN cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
 
 
 # java
-RUN curl -LO 'http://download.oracle.com/otn-pub/java/jdk/7u71-b14/jdk-7u71-linux-x64.rpm' -H 'Cookie: oraclelicense=accept-securebackup-cookie'
-RUN rpm -i jdk-7u71-linux-x64.rpm
-RUN rm jdk-7u71-linux-x64.rpm
+RUN yum clean all \
+   && yum install -y java-1.8.0-openjdk \
+   && yum clean all
+   
+RUN yum clean all \
+   && yum install -y java-1.8.0-openjdk-devel \
+   && yum clean all
 
-ENV JAVA_HOME /usr/java/default
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk.x86_64
 ENV PATH $PATH:$JAVA_HOME/bin
+RUN echo $JAVA_HOME
 RUN rm /usr/bin/java && ln -s $JAVA_HOME/bin/java /usr/bin/java
 
 # download native support
@@ -39,7 +46,7 @@ RUN mkdir -p /tmp/native
 RUN curl -L https://github.com/sequenceiq/docker-hadoop-build/releases/download/v2.7.1/hadoop-native-64-2.7.1.tgz | tar -xz -C /tmp/native
 
 # hadoop
-RUN curl -s http://www.eu.apache.org/dist/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz | tar -xz -C /usr/local/
+RUN curl -s https://archive.apache.org/dist/hadoop/common/hadoop-2.7.1/hadoop-2.7.1.tar.gz | tar -xz -C /usr/local/
 RUN cd /usr/local && ln -s ./hadoop-2.7.1 hadoop
 
 ENV HADOOP_PREFIX /usr/local/hadoop
@@ -50,7 +57,7 @@ ENV HADOOP_YARN_HOME /usr/local/hadoop
 ENV HADOOP_CONF_DIR /usr/local/hadoop/etc/hadoop
 ENV YARN_CONF_DIR $HADOOP_PREFIX/etc/hadoop
 
-RUN sed -i '/^export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/java/default\nexport HADOOP_PREFIX=/usr/local/hadoop\nexport HADOOP_HOME=/usr/local/hadoop\n:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
+RUN sed -i '/^export JAVA_HOME/ s:.*:export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk.x86_64\nexport HADOOP_PREFIX=/usr/local/hadoop\nexport HADOOP_HOME=/usr/local/hadoop\n:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
 RUN sed -i '/^export HADOOP_CONF_DIR/ s:.*:export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop/:' $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
 #RUN . $HADOOP_PREFIX/etc/hadoop/hadoop-env.sh
 
@@ -86,8 +93,23 @@ RUN chown root:root /root/.ssh/config
 ADD bootstrap.sh /etc/bootstrap.sh
 RUN chown root:root /etc/bootstrap.sh
 RUN chmod 700 /etc/bootstrap.sh
+RUN vi /etc/bootstrap.sh -c "set ff=unix" -c ":wq"
 
 ENV BOOTSTRAP /etc/bootstrap.sh
+
+#copy files
+ADD mapreduce/ /mapreduce
+RUN chown -R root:root /mapreduce
+RUN chmod -R 777 /mapreduce
+RUN find /mapreduce -type f -name "mapper.py" -o -name "reducer.py" | xargs dos2unix
+
+ADD data/youtube-statistics/ /data/youtube-statistics/
+RUN chown -R root:root /data/
+RUN chmod -R 777 /data/
+RUN find /data/youtube-statistics/trending-statistics -type f -name "*.csv" | xargs dos2unix
+RUN find /data/youtube-statistics/trending-statistics -type f ! -name "*.csv" | xargs rm
+RUN find /data/youtube-statistics/categories -type f -name "*.json" | xargs dos2unix
+RUN find /data/youtube-statistics/categories -type f ! -name "*.json" | xargs rm
 
 # workingaround docker.io build error
 RUN ls -la /usr/local/hadoop/etc/hadoop/*-env.sh
