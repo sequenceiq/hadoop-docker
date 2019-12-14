@@ -1,0 +1,2 @@
+# exclude data files - too large for github
+*videos.csv
