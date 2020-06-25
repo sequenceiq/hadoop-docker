@@ -1,3 +1,5 @@
+# This project isn't active. Please don't use it at all!!!
+
 # Apache Hadoop 2.7.1 Docker image
 
 [![DockerPulls](https://img.shields.io/docker/pulls/sequenceiq/hadoop-docker.svg)](https://registry.hub.docker.com/u/sequenceiq/hadoop-docker/)
